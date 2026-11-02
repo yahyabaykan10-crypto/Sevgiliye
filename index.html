@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gönül Kapım ❤️</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ background:#020806;
+ color:#35ff91;
+ font-family:monospace;
+ text-align:center;
+ min-height:100vh;
+ padding:20px;
+}
+.terminal{
+ max-width:550px;
+ margin:50px auto 25px;
+ border:1px solid #35ff91;
+ border-radius:15px;
+ padding:25px 18px;
+ box-shadow:0 0 25px #35ff9155;
+}
+h1{font-size:25px;text-shadow:0 0 12px #35ff91}
+p{line-height:1.8}
+input{
+ background:#07140e;
+ color:#35ff91;
+ border:1px solid #35ff91;
+ border-radius:8px;
+ padding:14px;
+ width:100%;
+ max-width:250px;
+ text-align:center;
+ font-size:20px;
+ margin-top:15px;
+}
+button{
+ background:#123b27;
+ color:#35ff91;
+ border:1px solid #35ff91;
+ border-radius:9px;
+ padding:14px 20px;
+ margin-top:18px;
+ font-weight:bold;
+ cursor:pointer;
+}
+#bar{
+ height:10px;
+ width:0;
+ background:#35ff91;
+ transition:width .2s;
+}
+.progress{
+ background:#193024;
+ border-radius:20px;
+ overflow:hidden;
+ margin-top:20px;
+}
+#memories{display:none;max-width:550px;margin:auto}
+.message{
+ border:1px solid #35ff91;
+ border-radius:12px;
+ padding:20px;
+ margin:20px 0;
+ box-shadow:0 0 12px #35ff9122;
+}
+.photo{
+ width:100%;
+ max-width:350px;
+ border-radius:15px;
+ margin:12px auto;
+ border:2px solid #35ff91;
+}
+#gallery img{display:block}
+#wrong{color:#ff7777}
+</style>
+</head>
+
+<body>
+
+<div class="terminal" id="login">
+ <p>● LOVE SYSTEM — ONLINE</p>
+ <h1>ÖZEL GİRİŞ ❤️</h1>
+ <p>Bu gönül kapısı sadece sana açık...</p>
+ <p>Devam etmek için şifreni gir ❤️</p>
+ <input id="password" type="password" placeholder="ŞİFRE" maxlength="4">
+ <br>
+ <button onclick="checkPassword()">GÖNÜL KAPISINI AÇ ❤️</button>
+ <p id="wrong"></p>
+</div>
+
+<div class="terminal" id="welcome" style="display:none">
+ <p>● LOVE SYSTEM — ONLINE</p>
+ <h1>HOŞ GELDİNİZ GÖNLÜME ❤️</h1>
+ <p id="status">Sana özel dünyam hazırlanıyor...</p>
+ <div class="progress"><div id="bar"></div></div>
+ <p id="percent">%0</p>
+ <button id="open" style="display:none" onclick="openMemories()">
+ GÖNÜL KAPISINI AÇ ❤️
+ </button>
+</div>
+
+<div id="memories">
+ <h1>EN GÜZEL ANILARIMIZ ❤️</h1>
+
+ <div class="message">
+  <h2>Bizim Hikâyemiz</h2>
+  <p>Seninle geçen her an benim için çok kıymetli. İyi ki yollarımız kesişmiş. ❤️</p>
+ </div>
+
+ <div class="message">
+  <h2>Fotoğraflarımız 📸</h2>
+  <p>Birlikte çekildiğimiz fotoğrafları buraya ekleyebilirsin.</p>
+  <input type="file" id="photos" accept="image/*" multiple>
+  <div id="gallery"></div>
+ </div>
+
+ <div class="message">
+  <h2>Sana Söylemek İstediklerim ❤️</h2>
+  <p>Gülüşün en güzel manzaram, sesin en güzel melodim.</p>
+  <p>Her güzel anımda sen varsın.</p>
+  <p>İyi ki hayatımdasın, iyi ki benimlesin.</p>
+  <p>Seninle daha nice güzel anılara...</p>
+ </div>
+
+ <h1>SONSUZA KADAR ❤️</h1>
+ <p>Bu gönül kapısı sana her zaman açık.</p>
+</div>
+
+<script>
+function checkPassword(){
+ const pass=document.getElementById("password").value;
+ if(pass==="2734"){
+  document.getElementById("login").style.display="none";
+  document.getElementById("welcome").style.display="block";
+  startLoading();
+ }else{
+  document.getElementById("wrong").textContent="Şifre yanlış, tekrar dene ❤️";
+ }
+}
+
+function startLoading(){
+ let progress=0;
+ const timer=setInterval(()=>{
+  progress+=2;
+  document.getElementById("bar").style.width=progress+"%";
+  document.getElementById("percent").textContent="%"+progress;
+  if(progress>=100){
+   clearInterval(timer);
+   document.getElementById("status").textContent="Gönül kapısı hazır ❤️";
+   document.getElementById("open").style.display="inline-block";
+  }
+ },50);
+}
+
+function openMemories(){
+ document.getElementById("welcome").style.display="none";
+ document.getElementById("memories").style.display="block";
+}
+
+document.getElementById("photos").addEventListener("change",function(){
+ const gallery=document.getElementById("gallery");
+ gallery.innerHTML="";
+ Array.from(this.files).forEach(file=>{
+  const img=document.createElement("img");
+  img.className="photo";
+  img.src=URL.createObjectURL(file);
+  gallery.appendChild(img);
+ });
+});
+</script>
+
+</body>
+</html>
